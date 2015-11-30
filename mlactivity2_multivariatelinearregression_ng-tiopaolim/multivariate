@@ -1,0 +1,44 @@
+sigma = std(x);
+mu = mean(x);
+x(:,2) = (x(:,2) - mu(2))./ sigma(2);
+x(:,3) = (x(:,3) - mu(3))./ sigma(3);
+
+theta1 = [0 0 0];
+alpha1 = 0.03;
+for num_iterations = 1:50
+J1(num_iterations) = (1 / 2 * m) * ((x * theta1') - y)' * ((x * theta1') - y);
+theta1 = theta1 - (alpha1 / m .* (x' * ((x * theta1') - y)))';
+endfor
+
+theta2 = [0 0 0];
+alpha2 = 0.1;
+for num_iterations = 1:50
+J2(num_iterations) = (1 / 2 * m) * ((x * theta2') - y)' * ((x * theta2') - y);
+theta2 = theta2 - (alpha2 / m .* (x' * ((x * theta2') - y)))';
+endfor
+
+theta3 = [0 0 0];
+alpha3 = 0.3;
+for num_iterations = 1:50
+J3(num_iterations) = (1 / 2 * m) * ((x * theta3') - y)' * ((x * theta3') - y);
+theta3 = theta - (alpha3 / m .* (x' * ((x * theta3') - y)))';
+endfor
+
+% http://openclassroom.stanford.edu/MainFolder/DocumentPage.php?course=MachineLearning&doc=exercises/ex3/ex3.html
+theta = [0; 0; 0];
+alpha = 1;
+for num_iterations = 1:100
+J(num_iterations) = (1 / 2 * m) .* (x * theta - y)' * (x * theta - y);
+h = (1 / m) .* x' * ((x * theta) - y);
+theta = theta - alpha .* h;
+endfor
+plot(0:99, J(1:100), '-')
+
+price =  1.8286e+08
+
+% normal
+theta = [0; 0; 0];
+theta = inv (xx' * xx) * xx' * y;
+price = theta(1) + (theta(2)*1650) + (theta(3)*3);
+
+
